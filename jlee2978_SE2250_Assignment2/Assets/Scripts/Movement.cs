@@ -9,13 +9,15 @@ public class Movement : MonoBehaviour {
 
     private Rigidbody rb;
 
+    public Text scoreText;
     private int score;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
         score = 0;
-	}
+        SetScoreText();
+    }
 
     void FixedUpdate ()
     {
@@ -32,7 +34,13 @@ public class Movement : MonoBehaviour {
         if (other.gameObject.CompareTag("Pickup"))
         {
             other.gameObject.SetActive(false);
+            score++;        //this will need to be changed later
+            SetScoreText();
         }
-        
+    }
+
+    void SetScoreText()
+    {
+        scoreText.text = "SCORE: " + score.ToString();
     }
 }
