@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour {
 
@@ -8,16 +9,13 @@ public class Movement : MonoBehaviour {
 
     private Rigidbody rb;
 
+    private int score;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        score = 0;
 	}
-	/*
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    */
 
     void FixedUpdate ()
     {
@@ -27,5 +25,14 @@ public class Movement : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
 
         rb.AddForce(movement * speed);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            other.gameObject.SetActive(false);
+        }
+        
     }
 }
